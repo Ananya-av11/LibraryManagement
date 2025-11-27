@@ -1,0 +1,48 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<center>
+    {% if messages %}
+    <div class="alert alert-info alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+    </div>
+    {% endif %}
+</center>
+<div class="container p-4 mt-2 mb-5 align-items-center justify-content-center">
+    <h2 class="text-center mb-3">Approve / Disapprove</h2>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr class="bg-dark text-light text-center">                
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+            {% for i in ac %}
+
+            <tr class="text-center">
+                <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                <td>{{i.user.email}}</td>
+                <td>{{i.phone}}</td>
+                <td>
+                    {% if i.status == 0 %}
+                    <a href="{% url 'req_approve' i.id %}" class="btn btn-info">Approve</a>
+                    <a href="{% url 'req_disapprove' i.id %}" class="btn btn-danger">Disapprove</a>
+                    {% endif %}
+                    {% if i.status == 1 %}
+                    <button type="button" class="btn btn-info" disabled>Approved</button>
+                    {% endif %}
+                    {% if i.status == 2 %}
+                    <button type="button" class="btn btn-danger" disabled>Disapproved</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

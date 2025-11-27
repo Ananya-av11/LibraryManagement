@@ -1,0 +1,41 @@
+{% extends 'userhome.html' %}
+{% block content %}
+{% load static %}
+<body style="background-image: url('{% static "images/back2.jpg" %}');">
+<center>
+    {% if messages %}
+    <div class="alert alert-info alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for message in messages %}
+            {{ message }} 
+        {% endfor %}
+    </div>
+    {% endif %}
+    </center>
+<div class="container border p-4 mt-5 mb-5" style="max-width: 400px; background: rgba(255, 255, 255, 0.6); border-radius: 10px; box-shadow: 0 4px 10px rgb(0, 0, 0);">
+    <div class="row-md-6">
+    <h2 class=" text-center mb-4">Report Lost Book</h2></div>
+    <div class="row-md-6">    
+    <form action="{% url 'report_lost_book' %}" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for=""><strong> Select Book</strong></label>
+                <select name="bookid" class="form-control" id="">
+                {% for i in rentitem %}
+                <option value="{{i.book.id}}">{{i.book.bookname}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-danger btn-block">Report as Lost</button>
+            </div>
+            
+        </form>
+        </div>
+        
+</div>
+
+</body>
+{% endblock %}

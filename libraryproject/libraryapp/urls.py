@@ -1,0 +1,63 @@
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('home',views.home,name='home'),
+    path('about',views.about,name='about'),
+    path('loginpage',views.loginpage,name='loginpage'),
+    path('login_fun',views.login_fun,name='login_fun'),
+    path('signup',views.signup,name='signup'),
+    path('user_register_fun',views.user_register_fun,name='user_register_fun'),
+
+
+    path('adminhome',views.adminhome,name='adminhome'),
+    path('addbooks',views.addbooks,name='addbooks'),
+    path('add_book',views.add_book,name='add_book'),
+    path('approve',views.approve,name='approve'),
+    path('req_approve/<int:pk>',views.req_approve,name='req_approve'),
+    path('req_disapprove/<int:pk>',views.req_disapprove,name='req_disapprove'),
+    path('viewbooks',views.viewbooks,name='viewbooks'),
+    path('updatebooks/<int:pk>',views.updatebooks,name='updatebooks'),
+    path('deletebook/<int:pk>',views.deletebook,name='deletebook'),
+    path('edit_book/<int:pk>',views.edit_book,name='edit_book'),
+    path('viewuser',views.viewuser,name='viewuser'),
+    path('delete_user/<int:pk>',views.delete_user,name='delete_user'),
+    path('rentalbooks',views.rentalbooks,name='rentalbooks'),
+    path('purchasebooks',views.purchasebooks,name='purchasebooks'),
+    # path('adnotification',views.adnotification,name='adnotification'),
+    path('adminresetpassword',views.adminresetpassword,name='adminresetpassword'),
+    path('admin_resetpassword_fun',views.admin_resetpassword_fun,name='admin_resetpassword_fun'),
+
+
+
+    path('userhome',views.userhome,name='userhome'),
+    path('allbooks',views.allbooks,name='allbooks'),
+    path('rentbookinfo/<int:pk>',views.rentbookinfo,name='rentbookinfo'),
+    path('rent_info/<int:pk>',views.rent_info,name='rent_info'),
+    # path('rent_book/<int:pk>',views.rent_book,name='rent_book'),
+    # path('rentcart',views.rentcart,name='rentcart'),
+    # path('decrement_r/<int:pk>',views.decrement_r,name='decrement_r'),
+    # path('increment_r/<int:pk>',views.increment_r,name='increment_r'),
+    # path('remove_r/<int:pk>',views.remove_r,name='remove_r'),
+    path('rentalhistory',views.rentalhistory,name='rentalhistory'),
+    # path('mark_overdue_viewed',views.mark_overdue_viewed,name='mark_overdue_viewed'),
+    path('purchasehistory',views.purchasehistory,name='purchasehistory'),
+    path('return_book/<int:pk>',views.return_book,name='return_book'),
+    path('lostbook',views.lostbook,name='lostbook'),
+    path('report_lost_book',views.report_lost_book,name='report_lost_book'),
+    path('viewprofile',views.viewprofile,name='viewprofile'),
+    path('updateprofile',views.updateprofile,name='updateprofile'),
+    path('edit_user',views.edit_user,name='edit_user'),
+    path('purchase_book/<int:pk>',views.purchase_book,name='purchase_book'),
+    path('purchasecart',views.purchasecart,name='purchasecart'),
+    path('decrement_pquantity/<int:pk>',views.decrement_pquantity,name='decrement_pquantity'),
+    path('increment_pquantity/<int:pk>',views.increment_pquantity,name='increment_pquantity'),
+    path('remove_pbook/<int:pk>',views.remove_pbook,name='remove_pbook'),
+    path('checkoutpage',views.checkoutpage,name='checkoutpage'),
+    path('placeorder',views.placeorder,name='placeorder'),
+    # path('usernotification',views.usernotification,name='usernotification'),
+    path('userresetpassword',views.userresetpassword,name='userresetpassword'),
+    path('user_resetpassword_fun',views.user_resetpassword_fun,name='user_resetpassword_fun'),
+    path('logoutfun',views.logoutfun,name='logoutfun')
+]

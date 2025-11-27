@@ -1,0 +1,119 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<center>
+    {% if messages %}
+    <div class="alert alert-info alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+    </div>
+    {% endif %}
+</center>    
+<div class="container-fluid p-4 mt-2 mb-5 align-items-center justify-content-center">
+    <h2 class="text-center mb-3">Rental Information</h2>
+    <div class="text-right mb-3" >
+
+        <label for="returnStatusFilter"><b>Filter by Return Status:</b></label>
+        <select id="returnStatusFilter" class="form-control" style="width: 200px;  display: inline-block;">
+            <option value="all" {% if return_status == 'all' %}selected{% endif %}>All</option>
+            <option value="returned" {% if return_status == 'returned' %}selected{% endif %}>Returned</option>
+            <option value="not_returned" {% if return_status == 'not_returned' %}selected{% endif %}>Not Returned</option>
+            <option value="lost" {% if return_status == 'lost' %}selected{% endif %}>Lost</option>
+        </select>
+
+    </div>
+    <div class="table-responsive">
+        
+        <table class="table table-hover">
+            <tr class="bg-dark text-light">
+                <th>User</th>
+                <th>Book Name</th>
+                <th>Author</th> 
+                <th>Publisher ID</th>   
+                <th>Rental Date</th>
+                <th>Due Date</th>
+                <th>Fine</th>
+                <th>Quantity</th>
+                <th>Return Status</th>    
+                
+            </tr>
+            {% for i in rental_books %}
+
+            <tr>
+                <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                <td>{{i.book.bookname}}</td>
+                <td>{{i.book.authorname}}</td>
+                <td>{{i.book.publisher_id}}</td>
+                <td>{{i.rentaldate}}</td>
+                <td>{{i.duedate}}</td>
+                <td>{{i.fine}}</td>
+                <td>{{i.quantity}}</td>
+                <td>
+                    {% if i.lost == 1 %}
+                    <span class="text-danger">Lost</span>
+                    {% elif i.returned == 0 %}
+                    <span class="text-primary">Not Returned</span>
+                    {% else %}
+                    <span class="text-success">Returned</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div id="overdueModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"> Overdue Rental Alert</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>The following rentals are overdue:</strong></p>
+                <ul>
+                    {% for rental in overdue_alert %}
+                        <li>
+                            <b>User:</b> {{rental.user}}<br>
+                            <b>Book:</b> {{ rental.book }}<br>
+                            <b>Due Days:</b> {{ rental.overdue_days }} days overdue<br>
+                            <b>Fine:</b> ₹{{ rental.fine }}
+                        </li>
+                        <hr>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% if overdue_alert %}
+<script>
+    window.onload = function() {
+        $('#overdueModal').modal('show');
+    };
+
+    $(document).ready(function () {
+        // When the overdue modal is closed
+        $('#overdueModal').on('hidden.bs.modal', function () {
+            // Hide the badge in the "Rental Books" link
+            $('.nav-link[href*="rentalbooks"] .badge').hide();
+        });
+    });
+</script>
+{% endif %}
+
+<script>
+    document.getElementById("returnStatusFilter").addEventListener("change", function() {
+        var selectedStatus = this.value;
+        window.location.href = "?status=" + selectedStatus;
+    });
+</script>
+{% endblock %}

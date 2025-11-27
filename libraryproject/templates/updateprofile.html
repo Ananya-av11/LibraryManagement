@@ -1,0 +1,52 @@
+{% extends 'userhome.html' %}
+{% block content %}
+{% load static %}
+<body style="background-image: url('{% static "images/back2.jpg" %}');">
+<center>
+    {% if messages %}
+    <div class="alert alert-info alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for message in messages %}
+            {{ message }} 
+        {% endfor %}
+    </div>
+    {% endif %}
+    </center>
+  <div class="container p-4 mt-5 mb-5" style="max-width: 400px; background: rgba(255, 255, 255, 0.6); border-radius: 10px; box-shadow: 0 4px 10px rgb(0, 0, 0);">
+    <h3 class="text-center mb-3">Update Profile</h3>
+    <form action="{% url 'edit_user' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col">
+            <input type="text" placeholder="First Name" name="fname" class="form-control" value="{{ac.user.first_name}}">
+        </div>
+        <div class="col">
+            <input type="text" placeholder="Last Name" name="lname" class="form-control" value="{{ac.user.last_name}}">
+        </div>
+      </div><br>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" name="uname" value="{{ac.user.username}}">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Address" name="address" value="{{ac.address}}">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="Phone Number" name="phone" value="{{ac.phone}}" title="Please enter a valid 10 digit number" pattern="[0-9]{10}" >
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Email" name="email" value="{{ac.user.email}}">
+      </div>
+      
+      <div class="form-group">
+        <img src="{{ac.image.url}}" alt="" height="75" width="75">
+        <input type="file" class="form-control" placeholder="Photo" name="img">
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">UPDATE</button>
+      </div>
+      
+      </form>
+      </div>
+</body>
+{% endblock %}

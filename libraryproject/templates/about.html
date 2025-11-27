@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block content %}
+{% load static %}
+<h1 style="background-image: url('{% static "images/img2.webp" %}');" class="text-center text-white "><i>About Us</i></h1>
+<div class="container-fluid">
+    <p>Learning is a lifetime journey. To make this journey enjoyable, we BookNest situated at Kerala,provide an extensive list of books that you will find informative and mind changin all at once.
+        Reading is the best way to pass time and what better way than to borrow/purchase books from our library and liberat your mind altogether.
+        We provide a safe, comfortable and friendly environment that enables learning and advancement of knowledge.
+    </p>
+</div>
+<div class="container-fluid" style="margin-top: 50px;">
+    <div style="text-align: center;">
+        <h1>
+            Services
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col m-3 border text-center">
+            <img class="rounded" src="https://www.shutterstock.com/image-photo/serious-young-girl-loose-long-260nw-344673092.jpg" alt="" width="200px" height="200px">
+            <h5>Silent Reading</h5>
+            <p>
+                One needs silent to read books or to study, our library has special arrangement for the silence zone
+            </p>
+        </div>
+        <div class="col m-3 border text-center">
+            <img class="rounded" src="https://www.shutterstock.com/image-photo/woman-model-college-student-working-260nw-1197146626.jpg" alt="" width="200px" height="200px">
+            <h5>Book Rental</h5>
+            <p>Apart from reading inside the library, we also provide facility to rent and return the books in time</p>
+        </div><div class="col m-3 border text-center">
+            <img class="rounded" src="https://5.imimg.com/data5/SELLER/Default/2022/6/LL/NC/RN/35405658/elibrary-digital-library-management-system-500x500.jpg" alt="" width="200px" height="200px">
+            <h5>Ambience and infrastructure</h5>
+            <p>Modern infrastructure,air-conditioned, sound proof, state-of-art classrooms</p>
+        </div><div class="col m-3 border text-center">
+            <img class="rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvbcN8ES2nitJqdMWkl65anwSYJ6RtiNclw&s" alt="" width="200px" height="200px">
+            <h5>Categorized Book Collection</h5>
+            <p>We have excellent collection of books categorized under children, fiction etc for easy access</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

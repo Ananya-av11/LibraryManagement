@@ -1,0 +1,21 @@
+{% extends 'userhome.html' %}
+{% block content %}
+
+{% if overdue_alert %}
+
+    <div class="container mt-3">
+        <h4 class="text-center">Overdue Rentals Alert</h4>
+
+
+        
+
+        
+    </div>
+    {% else %}
+
+    <div style="width: 100%; height: 300px;">
+        <p class="text-center"><b>No Notifications</b></p>
+    </div>
+{% endif %}
+
+{% endblock %}

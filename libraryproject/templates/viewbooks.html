@@ -1,0 +1,51 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<center>
+    {% if messages %}
+    <div class="alert alert-info alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+    </div>
+    {% endif %}
+</center>
+<div class="container-fluid p-4 mt-2 mb-5 align-items-center justify-content-center">
+    <h2 class="text-center mb-3">Books Details</h2>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped ">
+            <tr class="bg-dark text-light text-center">
+            <!-- <tr style="height: 40px; text-align: center;">  -->
+                <th>Image</th>
+                <th>Name</th>
+                <td>Description</td>
+                <th>Author</th>
+                <th>Publisher ID</th>
+                <th>Book Stock</th>
+                <th>Price</th>
+
+                <th colspan="2">Action</th>
+            </tr>
+            {% for i in book %}
+            <tr>
+                <td>
+                    <img src="{{i.bookimage.url}}" alt="" width="50" height="50">
+                </td>
+                <td>{{i.bookname}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.authorname}}</td>
+                <td>{{i.publisher_id}}</td>
+                <td>{{i.stock}}</td>
+                <td>{{i.price}}</td>
+                <td><button class="btn btn-primary">
+                    <a class="text-white" href="{% url 'updatebooks' i.id %}" style="text-decoration: none;">Edit</a></button></td>
+                <td><button class="btn btn-danger">
+                    <a class="text-white" href="{% url 'deletebook' i.id %}" style="text-decoration: none;">Delete</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

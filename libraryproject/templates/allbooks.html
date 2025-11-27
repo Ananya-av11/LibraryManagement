@@ -1,0 +1,45 @@
+{% extends 'userhome.html' %}
+{% block content %}
+<form method="GET" action="{% url 'allbooks' %}" class="d-flex justify-content-center mt-4 mb-4">
+    <input type="text" name="q" class="form-control w-50" placeholder="Search by Book Name or Author Name" value="{{ query }}">
+    <button type="submit" class="btn btn-primary ms-2 ml-2">Search</button>
+</form>
+
+<center>
+    {% if messages %}
+    <div class="alert alert-danger alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+</center>
+
+<div class="container">
+    {% if book %}
+    <h3 class="text-center mt-3 mb-3">Available Books</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for i in book %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ i.bookimage.url }}" class="card-img-top" alt="Book Image" style="height: 200px;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ i.bookname }}</h5>
+                    <h6 class="card-text">{{ i.authorname }}</h6>
+                    <p class="card-text">{{ i.description }} <br>₹{{ i.price }} <br>Stock: {{ i.stock }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-success"><a href="{% url 'rentbookinfo' i.id %}" class="text-white" style="text-decoration: none;">Rent</a></button>
+                        <button class="btn btn-success"><a href="{% url 'purchase_book' i.id %}" class="text-white" style="text-decoration: none;">Purchase</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center"><b>No Books Available</b></p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+{% load static %}
+<body style="background-image: url('{% static "images/back2.jpg" %}');">
+<center>
+    {% if messages %}
+    <div class="alert alert-info alert-dismissible" style="width: 50%; margin-bottom: 15px; font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for message in messages %}
+            {{ message }} 
+        {% endfor %}
+    </div>
+    {% endif %}
+    </center>
+<div class="container text-center border p-4 mt-5 mb-5" style="max-width: 400px; background: rgba(255, 255, 255, 0.6); border-radius: 10px; box-shadow: 0 4px 10px rgb(0, 0, 0);">
+    <div class="row-md-6">
+    <h2>Update Book</h2></div>
+    <div class="row-md-6">    
+    <form action="{% url 'edit_book' book.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <input type="text" class="form-control" name="bname" value="{{book.bookname}}">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="bdesc" value="{{book.description}}">
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control" name="bauth" value="{{book.authorname}}">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="bpid" value="{{book.publisher_id}}">
+            </div>
+            <div class="form-group">
+                <input type="numer" class="form-control" name="bstock" value="{{book.stock}}">
+            </div>
+            <div class="form-group">
+                <input type="numer" class="form-control" name="bprice" value="{{book.price}}">
+            </div>
+            <div class="form-group">
+                <img src="{{book.bookimage.url}}" alt="" height="100" width="100">
+                <input type="file" class="form-control" placeholder="Photo" name="bimg">
+              </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">UPDATE</button>
+            </div>
+            
+        </form>
+        </div>
+        
+</div>
+</body>
+{% endblock %}
